@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account - ModernNightsRP</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Raleway:wght@300;400;600&display=swap');
+
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #800020;
+            --accent: #c1a57b;
+            --text: #ffffff;
+            --dark: #0f0f1a;
+            --light: #e0e0e0;
+            --discord: #5865F2;
+            --success: #00C851;
+            --danger: #ff4444;
+            --warning: #FFC107;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(rgba(15, 15, 26, 0.95), rgba(15, 15, 26, 0.95)),
+                        url('/api/placeholder/1920/1080');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--text);
+            font-family: 'Raleway', sans-serif;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background-color: rgba(26, 26, 46, 0.95);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(193, 165, 123, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--accent);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .account-dashboard {
+            display: flex;
+            margin-top: 60px;
+            min-height: calc(100vh - 60px);
+        }
+
+        .sidebar {
+            width: 300px;
+            background-color: rgba(26, 26, 46, 0.8);
+            padding: 2rem;
+            border-right: 1px solid rgba(193, 165, 123, 0.1);
+            backdrop-filter: blur(10px);
+            overflow-y: auto;
+        }
+
+        .sidebar-title {
+            font-family: 'Cinzel', serif;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            border-bottom: 1px solid rgba(193, 165, 123, 0.2);
+            padding-bottom: 0.5rem;
+        }
+
+        .nav-section {
+            margin-bottom: 2rem;
+        }
+
+        .nav-section button {
+            display: block;
+            width: 100%;
+            background: none;
+            color: var(--text);
+            border: none;
+            padding: 1rem;
+            text-align: left;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .nav-section button:hover {
+            background-color: rgba(193, 165, 123, 0.1);
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            background-color: rgba(15, 15, 26, 0.6);
+            overflow-y: auto;
+        }
+
+        .profile-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .profile-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--light);
+        }
+
+        .profile-form input, .profile-form textarea, .profile-form select {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(193, 165, 123, 0.2);
+            border-radius: 5px;
+            background-color: rgba(15, 15, 26, 0.8);
+            color: var(--text);
+        }
+
+        .profile-avatar {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .profile-avatar img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: var(--dark);
+        }
+
+        .profile-avatar input {
+            flex: 1;
+        }
+
+        @media (max-width: 768px) {
+            .account-dashboard {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid rgba(193, 165, 123, 0.1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-moon"></i>
+                ModernNightsRP
+            </a>
+        </div>
+    </nav>
+
+    <div class="account-dashboard">
+        <div class="sidebar">
+            <h2 class="sidebar-title">Account Navigation</h2>
+            <div class="nav-section">
+                <button onclick="showSection('profile')">Profile</button>
+                <button onclick="showSection('applications')">Applications</button>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div id="profileSection" style="display: none;">
+                <h3>Edit Profile</h3>
+                <div class="profile-avatar">
+                    <img src="/api/placeholder/80/80" alt="Profile Avatar">
+                    <input type="file" accept="image/*">
+                </div>
+                <form class="profile-form">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username">
+
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email">
+
+                    <label for="discord">Discord ID</label>
+                    <input type="text" id="discord" name="discord" placeholder="e.g., User#1234">
+
+                    <label for="biography">Biography</label>
+                    <textarea id="biography" name="biography" rows="4" placeholder="Tell us about yourself..."></textarea>
+
+                    <label for="timezone">Timezone</label>
+                    <select id="timezone" name="timezone">
+                        <option value="">Select your timezone</option>
+                        <option value="PST">Pacific Standard Time (PST)</option>
+                        <option value="EST">Eastern Standard Time (EST)</option>
+                        <option value="GMT">Greenwich Mean Time (GMT)</option>
+                    </select>
+
+                    <button type="submit">Save Changes</button>
+                </form>
+            </div>
+
+            <div id="applicationsSection">
+                <h3>Your Applications</h3>
+                <p>Select an application from the sidebar to view details.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(section) {
+            const profileSection = document.getElementById('profileSection');
+            const applicationsSection = document.getElementById('applicationsSection');
+
+            if (section === 'profile') {
+                profileSection.style.display = 'block';
+                applicationsSection.style.display = 'none';
+            } else {
+                profileSection.style.display = 'none';
+                applicationsSection.style.display = 'block';
+            }
+        }
+
+        // Initialize with Applications section visible
+        document.addEventListener('DOMContentLoaded', () => {
+            showSection('applications');
+        });
+    </script>
+</body>
+</html>

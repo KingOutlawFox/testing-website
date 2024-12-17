@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - ModernNightsRP</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Raleway:wght@300;400;600&display=swap');
+
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #800020;
+            --accent: #c1a57b;
+            --text: #ffffff;
+            --dark: #0f0f1a;
+            --light: #e0e0e0;
+            --discord: #5865F2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(rgba(15, 15, 26, 0.95), rgba(15, 15, 26, 0.95)),
+                        url('/api/placeholder/1920/1080');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--text);
+            font-family: 'Raleway', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar {
+            background-color: rgba(26, 26, 46, 0.95);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(193, 165, 123, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--accent);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .login-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            margin-top: 60px;
+        }
+
+        .login-box {
+            background: rgba(26, 26, 46, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 450px;
+            border: 1px solid rgba(193, 165, 123, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-header h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .login-header p {
+            color: var(--light);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .login-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .discord-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            background-color: var(--discord);
+            color: white;
+            padding: 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            border: 2px solid var(--discord);
+        }
+
+        .discord-btn:hover {
+            background-color: transparent;
+            transform: translateY(-2px);
+        }
+
+        .discord-btn i {
+            font-size: 1.2rem;
+        }
+
+        .or-divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 2rem 0;
+            color: var(--light);
+        }
+
+        .or-divider::before,
+        .or-divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid rgba(193, 165, 123, 0.2);
+        }
+
+        .or-divider span {
+            padding: 0 1rem;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        .verification-form {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .verification-form.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid rgba(193, 165, 123, 0.2);
+            border-radius: 5px;
+            background-color: rgba(15, 15, 26, 0.6);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--accent);
+            background-color: rgba(15, 15, 26, 0.8);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            border: 2px solid var(--secondary);
+        }
+
+        .submit-btn:hover {
+            background-color: transparent;
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .error-message {
+            color: #ff4444;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .success-message {
+            color: #00C851;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .login-box {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-moon"></i>
+                ModernNightsRP
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="lore.html">Lore</a></li>
+                <li><a href="rules.html">Rules</a></li>
+                <li><a href="apply.html">Apply</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="login-container">
+        <div class="login-box" data-aos="fade-up">
+            <div class="login-header">
+                <h2>Welcome Back</h2>
+                <p>Connect with your Discord account or use your verification code to access ModernNightsRP</p>
+            </div>
+
+            <div class="login-options">
+                <a href="#" class="discord-btn" id="discordLogin">
+                    <i class="fab fa-discord"></i>
+                    Login with Discord
+                </a>
+
+                <div class="or-divider">
+                    <span>or</span>
+                </div>
+
+                <form class="verification-form" id="verificationForm">
+                    <div class="form-group">
+                        <label for="verificationCode">Verification Code</label>
+                        <input type="text" id="verificationCode" name="verificationCode" placeholder="Enter your verification code" required>
+                        <div class="error-message" id="codeError">Invalid verification code. Please try again.</div>
+                        <div class="success-message" id="codeSuccess">Verification successful! Redirecting...</div>
+                    </div>
+                    <button type="submit" class="submit-btn">Verify Account</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Discord login handler
+        document.getElementById('discordLogin').addEventListener('click', (e) => {
+            e.preventDefault();
+            // Replace with your Discord OAuth2 URL
+            const discordOAuthURL = 'https://discord.com/api/oauth2/authorize' + 
+                '?client_id=1230911773146878086' +
+                '&redirect_uri=https://modernnights.net/discord/callback' +
+                '&response_type=code' +
+                '&scope=identify%20guilds';
+            
+            window.location.href = discordOAuthURL;
+        });
+
+        // Show verification form if code is in URL
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('code')) {
+            document.querySelector('.verification-form').classList.add('active');
+        }
+
+        // Handle verification code submission
+        document.getElementById('verificationForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const code = document.getElementById('verificationCode').value;
+            const errorElement = document.getElementById('codeError');
+            const successElement = document.getElementById('codeSuccess');
+
+            try {
+                // Replace with your actual API endpoint
+                const response = await fetch('/api/verify', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ code }),
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    errorElement.style.display = 'none';
+                    successElement.style.display = 'block';
+                    setTimeout(() => {
+                        window.location.href = '/dashboard.html';
+                    }, 2000);
+                } else {
+                    errorElement.style.display = 'block';
+                    successElement.style.display = 'none';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                errorElement.textContent = 'An error occurred. Please try again later.';
+                errorElement.style.display = 'block';
+                successElement.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

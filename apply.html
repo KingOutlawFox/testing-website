@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply - ModernNightsRP</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Raleway:wght@300;400;600&display=swap');
+
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #800020;
+            --accent: #c1a57b;
+            --text: #ffffff;
+            --dark: #0f0f1a;
+            --light: #e0e0e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--text);
+            font-family: 'Raleway', sans-serif;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background-color: rgba(26, 26, 46, 0.95);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(193, 165, 123, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--accent);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .application-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-family: 'Cinzel', serif;
+            color: var(--accent);
+        }
+
+        .guidelines {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(193, 165, 123, 0.1);
+            animation: fadeIn 1s ease-out;
+        }
+
+        .guidelines h2 {
+            color: var(--accent);
+            font-family: 'Cinzel', serif;
+            margin-bottom: 1rem;
+        }
+
+        .guidelines ul {
+            list-style: none;
+        }
+
+        .guidelines li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .guidelines li::before {
+            content: '•';
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+        }
+
+        .application-form {
+            background-color: rgba(26, 26, 46, 0.95);
+            padding: 2rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(193, 165, 123, 0.1);
+            animation: slideUp 1s ease-out;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: var(--accent);
+            font-family: 'Cinzel', serif;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: rgba(15, 15, 26, 0.8);
+            border: 1px solid rgba(193, 165, 123, 0.2);
+            border-radius: 5px;
+            color: var(--text);
+            font-family: 'Raleway', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 5px rgba(193, 165, 123, 0.3);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--secondary);
+            color: var(--text);
+            border: 2px solid var(--secondary);
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Raleway', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: transparent;
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .application-container {
+                padding: 6rem 1rem 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-moon"></i>
+                ModernNightsRP
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="lore.html">Lore</a></li>
+                <li><a href="rules.html">Rules</a></li>
+                <li><a href="apply.html">Apply</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="application-container">
+        <h1 class="section-title" data-aos="fade-up">Join Our Community</h1>
+        
+        <div class="guidelines" data-aos="fade-up">
+            <h2>Application Guidelines</h2>
+            <p>Before applying, please ensure you:</p>
+            <ul>
+                <li><a href="https://docs.google.com/document/d/1-1-mCABEbRX87PEX73BOJNEDxEsNPoBZA1cuuaosUQY/edit?usp=sharing">Have read our rules and lore thoroughly</a></li>
+                <li>You are at least 18+ years old</li>
+                <li>Have a Discord account</li>
+                <li>Must have a Legal working copy of GTA5 OR RDR2</li>
+                <li>Are willing to participate regularly in roleplay</li>
+            </ul>
+        </div>
+
+        <form class="application-form" id="applicationForm" data-aos="fade-up" data-aos-delay="200">
+            <h3 class="form-section-title">Basic Information</h3>
+            <div class="form-group">
+                <label for="discordTag">Discord Username</label>
+                <input type="text" id="discordTag" name="discordTag" required>
+            </div>
+            <div class="form-group">
+                <label for="age">How old are you?</label>
+                <input type="number" id="age" name="age" min="18" required>
+            </div>
+            <div class="form-group">
+                <label for="timezone">What is your timezone?</label>
+                <input type="text" id="timezone" name="timezone" required>
+            </div>
+            <div class="form-group">
+                <label for="experience">Do you have prior roleplay experience? If yes, describe briefly.</label>
+                <textarea id="experience" name="experience" required></textarea>
+            </div>
+
+            <h3 class="form-section-title">Roleplay Knowledge</h3>
+            <div class="form-group">
+                <label for="rpMeaning">What does the term "roleplay" mean to you?</label>
+                <textarea id="rpMeaning" name="rpMeaning" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="icOoc">What is the difference between IC (In Character) and OOC (Out of Character)?</label>
+                <textarea id="icOoc" name="icOoc" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="metagaming">What are metagaming and powergaming, and why should they be avoided?</label>
+                <textarea id="metagaming" name="metagaming" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="storytelling">Explain the importance of storytelling in roleplay.</label>
+                <textarea id="storytelling" name="storytelling" required></textarea>
+            </div>
+
+            <h3 class="form-section-title">Character Creation</h3>
+            <div class="form-group">
+                <label for="charName">What is the name of your character?</label>
+                <input type="text" id="charName" name="charName" required>
+            </div>
+            <div class="form-group">
+                <label for="backstory">Provide a brief backstory for your character (minimum 100 words)</label>
+                <textarea id="backstory" name="backstory" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="motivation">What motivates your character? What are their goals?</label>
+                <textarea id="motivation" name="motivation" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="traits">What unique skills or traits does your character possess?</label>
+                <textarea id="traits" name="traits" required></textarea>
+            </div>
+
+            <h3 class="form-section-title">Server-Specific</h3>
+            <div class="form-group">
+                <label for="whyJoin">Why do you want to join ModernNightsRP?</label>
+                <textarea id="whyJoin" name="whyJoin" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="howHeard">How did you hear about our server? (If by streamer put there link pls!!)</label>
+                <input type="text" id="howHeard" name="howHeard" required>
+            </div>
+            <div class="form-group">
+                <label for="scenarios">What kind of roleplay scenarios are you most interested in exploring on the server?</label>
+                <textarea id="scenarios" name="scenarios" required></textarea>
+            </div>
+
+            <h3 class="form-section-title">Rules and Policies</h3>
+            <div class="form-group">
+                <label for="readRules">Have you read and understood the server rules?</label>
+                <select id="readRules" name="readRules" required>
+                    <option value="">Please select</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="codeOfConduct">Are you comfortable adhering to the roleplay server's code of conduct?</label>
+                <select id="codeOfConduct" name="codeOfConduct" required>
+                    <option value="">Please select</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="ruleBreaking">What will you do if you encounter a player breaking server rules?</label>
+                <textarea id="ruleBreaking" name="ruleBreaking" required></textarea>
+            </div>
+
+            <h3 class="form-section-title">Technical Information</h3>
+            <div class="form-group">
+                <label for="microphone">Do you have a working microphone?</label>
+                <select id="microphone" name="microphone" required>
+                    <option value="">Please select</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+
+            <h3 class="form-section-title">Final Verification</h3>
+            <div class="form-group">
+                <label for="verification">Write the following phrase to confirm your understanding of our rules: "I agree to follow all server guidelines and roleplay respectfully."</label>
+                <textarea id="verification" name="verification" required></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit Application</button>
+        </form>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Previous scripts remain the same
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        document.getElementById('applicationForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const applicationData = Object.fromEntries(formData.entries());
+
+            try {
+                const response = await fetch('/api/submit-application', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(applicationData),
+                });
+                
+                const data = await response.json();
+                if (data.success) {
+                    alert('Application submitted successfully! Please wait for admin review.');
+                    window.location.href = '/application-pending.html';
+                } else {
+                    alert('Error submitting application. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while submitting your application');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ModernNightsRP - Server Rules</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Raleway:wght@300;400;600&display=swap');
+
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #800020;
+            --accent: #c1a57b;
+            --text: #ffffff;
+            --dark: #0f0f1a;
+            --light: #e0e0e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--text);
+            font-family: 'Raleway', sans-serif;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background-color: rgba(26, 26, 46, 0.95);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(193, 165, 123, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 0.5rem 1rem;
+            background-color: rgba(26, 26, 46, 0.98);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--accent);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .rules-hero {
+            height: 60vh;
+            background: linear-gradient(rgba(15, 15, 26, 0.8), rgba(15, 15, 26, 0.8)),
+                        url('/api/placeholder/1920/1080');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rules-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, var(--dark) 100%);
+        }
+
+        .rules-hero-content {
+            max-width: 800px;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .rules-hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .rules-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .rules-section {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(193, 165, 123, 0.1);
+        }
+
+        .rules-section h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 0.5rem;
+        }
+
+        .rules-list {
+            list-style-type: none;
+            counter-reset: item;
+        }
+
+        .rules-list li {
+            counter-increment: item;
+            margin-bottom: 1rem;
+            padding-left: 2.5rem;
+            position: relative;
+        }
+
+        .rules-list li::before {
+            content: counter(item);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2rem;
+            height: 2rem;
+            background-color: var(--secondary);
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-weight: bold;
+        }
+
+        .warning {
+            background-color: rgba(128, 0, 32, 0.2);
+            border-left: 4px solid var(--secondary);
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        footer {
+            background-color: var(--dark);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h4 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-family: 'Cinzel', serif;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: var(--text);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .rules-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-moon"></i>
+                ModernNightsRP
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="lore.html">Lore</a></li>
+                <li><a href="rules.html">Rules</a></li>
+                <li><a href="apply.html">Apply</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="rules-hero">
+        <div class="rules-hero-content" data-aos="fade-up">
+            <h1>Community Guidelines</h1>
+            <p>Preserving the immersion, respect, and enjoyment of our supernatural roleplay experience.</p>
+        </div>
+    </section>
+
+    <div class="rules-content">
+        <div class="rules-section" data-aos="fade-up">
+            <h2>Fundamental Roleplay Principles</h2>
+            <ol class="rules-list">
+                <li>Maintain consistent and immersive character roleplay at all times.</li>
+                <li>Respect other players' roleplay experiences and storylines.</li>
+                <li>Avoid out-of-character (OOC) communication during active roleplay scenarios.</li>
+                <li>Character actions must be realistic and within the realm of your character's capabilities.</li>
+            </ol>
+        </div>
+
+        <div class="rules-section" data-aos="fade-up" data-aos-delay="100">
+            <h2>Combat and Conflict Resolution</h2>
+            <ol class="rules-list">
+                <li>All combat must be consensual and follow the server's combat mechanics.</li>
+                <li>Supernatural abilities must be balanced and approved by server administration.</li>
+                <li>No meta-gaming (using out-of-character knowledge in character interactions).</li>
+                <li>Respect the power dynamics and established lore of supernatural factions.</li>
+            </ol>
+        </div>
+
+        <div class="rules-section" data-aos="fade-up" data-aos-delay="200">
+            <h2>Community Conduct</h2>
+            <ol class="rules-list">
+                <li>Treat all community members with respect and dignity.</li>
+                <li>No harassment, discrimination, or offensive language will be tolerated.</li>
+                <li>Constructive communication is key to maintaining a positive community environment.</li>
+                <li>Staff decisions are final and must be respected.</li>
+            </ol>
+            <div class="warning">
+                <strong>Warning:</strong> Repeated violations of community guidelines may result in temporary or permanent server bans.
+            </div>
+        </div>
+
+        <div class="rules-section" data-aos="fade-up" data-aos-delay="300">
+            <h2>Character Development Guidelines</h2>
+            <ol class="rules-list">
+                <li>Character backgrounds must be approved by server administration.</li>
+                <li>Maintain character consistency and avoid sudden, unrealistic personality shifts.</li>
+                <li>Progression of supernatural abilities must be gradual and narratively justified.</li>
+                <li>Cross-server character continuity is subject to administrative review.</li>
+            </ol>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About Us</h4>
+                <p>ModernNightsRP is committed to creating an immersive and respectful roleplay environment.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <p>Rules • Lore • FAQ • Contact</p>
+            </div>
+        </div>
+        <p style="margin-top: 2rem;">&copy; 2024 ModernNightsRP. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
